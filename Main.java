@@ -16,7 +16,7 @@ public class Main {
     // Задание 1.
     // Номер 1
     public double fraction(double x) {
-        return x - (int) x;
+        return Math.abs(x) - Math.floor(Math.abs(x));
     }
     // Номер 3
     public int charToNum(char x) {
@@ -232,95 +232,196 @@ public class Main {
         return indexes;
     }
 
+    private static void task1(Main m, Scanner scanner) {
+        out.println("Выберите номер подзадания:");
+        int subChoice = scanner.nextInt();
+
+        switch (subChoice) {
+            case 1:
+                out.print("Введите дробное число: ");
+                double x = scanner.nextDouble();
+                double res_double = m.fraction(x);
+                out.printf("Для x = %.2f, дробная часть: %.2f%n", x, res_double);
+                break;
+            case 3:
+                out.print("Введите символ цифры: ");
+                char x1 = scanner.next().charAt(0);
+                int res_int = m.charToNum(x1);
+                out.println("Для символа '" + x1 + "' числовое значение: " + res_int);
+                break;
+            case 5:
+                out.print("Введите число для проверки на двузначность: ");
+                int x2 = scanner.nextInt();
+                boolean res_bool = m.is2Digits(x2);
+                out.println(x2 + " - это двузначное число: " + res_bool);
+                break;
+            case 7:
+                out.print("Введите три числа (a, b, num): ");
+                int a = scanner.nextInt();
+                int b = scanner.nextInt();
+                int num = scanner.nextInt();
+                res_bool = m.isInRange(a, b, num);
+                out.println(num + " входит в диапазон (" + a + ", " + b + "): " + res_bool);
+                break;
+            case 9:
+                out.print("Введите три числа для проверки на равенство: ");
+                a = scanner.nextInt();
+                b = scanner.nextInt();
+                int c = scanner.nextInt();
+                res_bool = m.isEqual(a, b, c);
+                out.printf("Числа %d, %d, %d равны: %b%n", a, b, c, res_bool);
+                break;
+            default:
+                out.println("Неверный ввод");
+        }
+    }
+
+    private static void task2(Main m, Scanner scanner) {
+        out.println("Выберите номер подзадания");
+        int subChoice = scanner.nextInt();
+
+        switch (subChoice) {
+            case 1:
+                out.print("Введите число для вычисления модуля: ");
+                int x = scanner.nextInt();
+                out.println("Модуль " + x + " = " + m.abs(x));
+                break;
+            case 3:
+                out.print("Введите число для проверки делимости на 3 или 5: ");
+                x = scanner.nextInt();
+                out.println("Число " + x + " подходит: " + m.is35(x));
+                break;
+            case 5:
+                out.print("Введите три числа для нахождения максимума: ");
+                int a = scanner.nextInt();
+                int b = scanner.nextInt();
+                int c = scanner.nextInt();
+                out.println("Максимум: " + m.max3(a, b, c));
+                break;
+            case 7:
+                out.print("Введите два числа для суммирования: ");
+                int x_int = scanner.nextInt();
+                int y_int = scanner.nextInt();
+                out.printf("Сумма %d + %d = %d\n", x_int, y_int, m.sum2(x_int, y_int));
+                break;
+            case 9:
+                out.print("Введите номер дня недели: ");
+                int d = scanner.nextInt();
+                out.printf("День недели %d: %s\n", d, m.day(d));
+                break;
+            default:
+                out.println("Неверный ввод");
+        }
+    }
+
+    private static void task3(Main m, Scanner scanner) {
+        out.println("Выберите номер подзадания:");
+        int subChoice = scanner.nextInt();
+
+        switch (subChoice) {
+            case 1:
+                out.print("Введите число для вывода списка чисел: ");
+                int x = scanner.nextInt();
+                out.println("Числа до " + x + ": " + m.listNums(x));
+                break;
+            case 3:
+                out.print("Введите число для вывода четных чисел: ");
+                x = scanner.nextInt();
+                out.println("Чётные до " + x + ": " + m.chet(x));
+                break;
+            case 5:
+                out.print("Введите число для подсчета количества знаков: ");
+                long x_long = scanner.nextLong();
+                out.println("Количество знаков в числе " + x_long + ": " + m.numLen(x_long));
+                break;
+            case 7:
+                out.print("Введите размер квадрата: ");
+                x = scanner.nextInt();
+                m.square(x);
+                break;
+            case 9:
+                out.print("Введите высоту треугольника: ");
+                x = scanner.nextInt();
+                m.rightTriangle(x);
+                break;
+            default:
+                out.println("Неверный ввод");
+        }
+    }
+
+    private static void task4(Main m, Scanner scanner) {
+        out.println("Выберите номер подзадания:");
+        int subChoice = scanner.nextInt();
+
+        // Ввод общего массива для всех подзаданий
+        out.print("Введите размер массива: ");
+        int size = scanner.nextInt();
+        int[] arr = new int[size];
+        out.println("Введите элементы массива:");
+        for (int i = 0; i < size; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        switch (subChoice) {
+            case 1:
+                out.print("Введите число для поиска: ");
+                int x = scanner.nextInt();
+                out.println("Первое вхождение " + x + " в массив " + m.arrToStr(arr) + ": " + m.findFirst(arr, x));
+                break;
+            case 3:
+                out.println("Максимальный модуль в " + m.arrToStr(arr) + " : " + m.maxAbs(arr));
+                break;
+            case 5:
+                out.print("Введите размер второго массива: ");
+                int insSize = scanner.nextInt();
+                int[] ins = new int[insSize];
+                out.println("Введите элементы второго массива:");
+                for (int i = 0; i < insSize; i++) {
+                    ins[i] = scanner.nextInt();
+                }
+                out.print("Введите позицию для вставки: ");
+                int pos = scanner.nextInt();
+                int[] output = m.add(arr, ins, pos);
+                out.println("Итоговый массив: " + m.arrToStr(output));
+                break;
+            case 7:
+                out.println("Исходный массив: " + m.arrToStr(arr));
+                out.println("Обратный массив: " + m.arrToStr(m.reverseBack(arr)));
+                break;
+            case 9:
+                out.print("Введите число для поиска всех вхождений: ");
+                x = scanner.nextInt();
+                out.println("Индексы: " + m.arrToStr(m.findAll(arr, x)));
+                break;
+            default:
+                out.println("Неверный ввод");
+        }
+    }
+
+
     public static void main(String[] args) {
         Main m = new Main();
+        Scanner scanner = new Scanner(System.in);
 
-        // Задание 1.
-        // Номер 1
-        double x = 5.25;
-        double res_double = m.fraction(x);
-        out.printf("Для x = %.2f, дробная часть: %.2f%n", x, res_double);
-        // Номер 3
-        char x1 = '3';
-        int res_int = m.charToNum(x1);
-        out.println("Для символа '" + x1 + "' числовое значение: " + res_int);
-        // Номер 5
-        int x2 = 23;
-        boolean res_bool = m.is2Digits(x2);
-        out.println(x2 + " - это двузначное число: " + res_bool);
-        // Номер 7
-        int a, b, num;
-        a = 5;
-        b = 1;
-        num = 2;
-        res_bool = m.isInRange(a, b, num);
-        out.println(num + " входит в диапазон (" + a + ", " + b + "): " + res_bool);
-        // Номер 9
-        int c;
-        a = 2;
-        b = 2;
-        c = 3;
-        res_bool = m.isEqual(a, b, c);
-        out.printf("Числа %d, %d, %d равны: %b%n", a, b, c, res_bool);
+        out.println("\nВыберите номер задания:");
+        int choice = scanner.nextInt();
 
-        // Задание 2
-        // Номер 1
-        int x4 = -4;
-        out.println("Модуль " + x4 + " = " + m.abs(x4));
-        // Номер 3
-        x4 = 5;
-        out.println("Число " + x4 + " подходит: " + m.is35(x4));
-        // Номер 5
-        a = 5;
-        b = 3;
-        c = 2;
-        out.println("Максимум: " + m.max3(a, b, c));
-        // Номер 7
-        int x_int, y_int;
-        x_int = 5;
-        y_int = 8;
-        out.printf("Сумма %d + %d = %d\n", x_int, y_int, m.sum2(x_int, y_int));
-        // Номер 9
-        int d = 10;
-        out.printf("День недели %d: %s\n", d, m.day(d));
-
-        // Задание 3
-        // Номер 1
-        x_int = 0;
-        out.println("Числа до " + x_int + ": " + m.listNums(x_int));
-        // Номер 3
-        x_int = 9;
-        out.println("Чётные до " + x_int + ": " + m.chet(x_int));
-        // Номер 5
-        long x_long = 12345;
-        out.println("Количество знаков в числе " + x_long + ": " + m.numLen(x_long));
-        // Номер 7
-        x_int = 4;
-        m.square(x_int);
-        // Номер 9
-        x_int = 5;
-        m.rightTriangle(x_int);
-
-        // Задание 4
-        // Номер 1
-        x_int = 2;
-        int[] arr_int = new int[]{1, 3, 4};
-        out.println("Первое вхождение " + x_int + " в массив " + m.arrToStr(arr_int) + ": " + m.findFirst(arr_int, x_int));
-        // Номер 3
-        arr_int = new int[]{1, 2, -7, 8, -9};
-        out.println("Максимальный модуль в " + m.arrToStr(arr_int) + " : " + m.maxAbs(arr_int));
-        // Номер 5
-        arr_int = new int[]{1, 2, 3, 4, 5};
-        int[] ins = new int[]{7, 8, 9};
-        int pos = 3;
-        int[] output = m.add(arr_int, ins, pos);
-        out.println("Итоговоый массив: " + m.arrToStr(output));
-        // Номер 7
-        out.println("Исходный массив: " + m.arrToStr(arr_int));
-        out.println("Обратный массив: " + m.arrToStr(m.reverseBack(arr_int)));
-        // Номер 9
-        arr_int = new int[]{1,2,3,8,2,2,9};
-        x_int = 2;
-        out.println("Индексы: " + m.arrToStr(m.findAll(arr_int, x_int)));
+        switch (choice) {
+            case 1:
+                task1(m, scanner);
+                break;
+            case 2:
+                task2(m, scanner);
+                break;
+            case 3:
+                task3(m, scanner);
+                break;
+            case 4:
+                task4(m, scanner);
+                break;
+            default:
+                out.println("Неверный ввод");
+        }
+        scanner.close();
     }
 }
